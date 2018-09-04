@@ -1,0 +1,5 @@
+
+<h1 (click)="openDialog()">OPEN</h1>
+<div>
+  <p *ngFor="let controller of listOfControllers" (click)="chooseBersions(controller); openDialog">{{controller}}</p>
+</div>

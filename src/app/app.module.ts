@@ -16,7 +16,8 @@ import { AppComponent } from './app.component';
 import { HomeComponent } from './components/home/home.component';
 import { WebviewDirective } from './directives/webview.directive';
 import { ElectronService } from './providers/electron.service';
-import { DialogVersionsComponent , DialogControllers} from './components/dialog-versions/dialog-versions.component';
+import { DialogVersionsComponent} from './components/dialog-versions/dialog-versions.component';
+import { SharedService } from './providers/shared.service';
 
 
 
@@ -34,8 +35,7 @@ export function HttpLoaderFactory(http: HttpClient) {
     AppComponent,
     HomeComponent,
     WebviewDirective,
-    DialogVersionsComponent,
-    DialogControllers
+    DialogVersionsComponent
   ],
   imports: [
     BrowserModule,
@@ -55,10 +55,10 @@ export function HttpLoaderFactory(http: HttpClient) {
     
   ],
   exports: [
-
+    
   ],
-  entryComponents: [DialogControllers],
-  providers: [ElectronService],
+  entryComponents: [DialogVersionsComponent],
+  providers: [ElectronService, SharedService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

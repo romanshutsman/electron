@@ -1,5 +1,14 @@
+<div mat-dialog-content>
+  
+  <h1 >OPEN</h1>
+  <button (click)="chooseBersions(controller);"  mat-dialog-close>Close</button>
+  <!-- <button mat-dialog-close>Cancel</button> -->
+  <h1>{{listOfControllers}}</h1>
+  <div mat-dialog-actions>
+    <button mat-button mat-dialog-close (click)="chooseBersions(controller);">No Thanks</button>
+  </div>
+  <div>
+    <p *ngFor="let controller of listOfControllers" (click)="chooseBersions(controller);">{{controller}}</p>
+  </div>
 
-<h1 (click)="openDialog()">OPEN</h1>
-<div>
-  <p *ngFor="let controller of listOfControllers" (click)="chooseBersions(controller); openDialog">{{controller}}</p>
 </div>

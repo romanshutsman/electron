@@ -1,6 +1,6 @@
+import { SharedService } from './../../providers/shared.service';
 import { Component, OnInit, Inject } from '@angular/core';
-import { ElectronService } from './../../providers/electron.service';
-import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import { HttpClient, HttpResponse } from '@angular/common/http';
 import { forkJoin } from 'rxjs';
 @Component({
@@ -10,37 +10,48 @@ import { forkJoin } from 'rxjs';
 })
 export class DialogVersionsComponent implements OnInit {
   listOfControllers: any = [];
-  constructor(private electron: ElectronService, public dialog: MatDialog, private http: HttpClient) {
+  constructor(
+    private http: HttpClient,
+    private shared: SharedService,
+    public dialogRef: MatDialogRef<DialogVersionsComponent>,
+    @Inject(MAT_DIALOG_DATA) public data) {
+
+
+    console.log(this.shared.versions);
+    this.listOfControllers = this.shared.versions;
     this.loadVersionOfControllers();
+
    }
 
   ngOnInit() {
   }
   loadVersionOfControllers() {
-    this.electron.connectVersionsofControllers();
-    console.log(this.listOfControllers, 'list');
-    console.log(this.electron.connectVersionsofControllers(), 'con');
+    // this.listOfControllers = JSON.parse(this.connectVersionsofControllers());
+    // this.listOfControllers = this.shared.versions;
+    // console.log(this.listOfControllers, 'LIST');
+  }
+  connectVersionsofControllers() {
+    const url = 'https://baconipsum.com/api/?type=meat-and-filler';
+    // const url = 'http://127.0.0.1:52652';
+    const response = this.httpGet(url);
+    console.log(response)
+    return response;
+  }
+  httpGet(url) {
+    let xmlHttp = null;
+    xmlHttp = new XMLHttpRequest();
+    xmlHttp.open('GET', url, false);
+    xmlHttp.send(null);
+    return xmlHttp.responseText;
   }
   chooseBersions(body) {
     console.log(body);
-    this.electron.chooseVersionsofControllers(body);
+    console.log(this.dialogRef);
+    this.dialogRef.close();
+    // this.electron.chooseVersionsofControllers(body);
   }
-  openDialog() {
-    this.dialog.open(DialogControllers);
-    console.log('open');
-  }
-  
-}
-
-@Component({
-  selector: 'dialog-controllers',
-  templateUrl: 'dialog-controllers.html'
-})
-export class DialogControllers {
-  constructor(
-    public ref: MatDialogRef<DialogControllers>,
-    @Inject(MAT_DIALOG_DATA) public data) {
+  close() {
+    this.dialogRef.close();
 
   }
-
 }

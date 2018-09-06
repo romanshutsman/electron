@@ -1,0 +1,8 @@
+{
+    "/api/*": {
+      "target": "https://baconipsum.com",
+      "secure": false,
+      "loglevel": "debug",
+      "changeOrigin": "true"
+    }
+  }

@@ -13,8 +13,8 @@ versions;
     console.log(this.versions, 'VERSIONS');
    }
   connectVersionsofControllers() {
-    const url = 'https://baconipsum.com/api/?type=meat-and-filler';
-    // const url = 'http://127.0.0.1:52652';
+    // const url = 'https://baconipsum.com/api/?type=meat-and-filler';
+    const url = '/api/?type=meat-and-filler';
     const response = this.httpGet(url);
     // console.log(response)
     return response;

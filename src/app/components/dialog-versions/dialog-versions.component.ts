@@ -15,40 +15,37 @@ export class DialogVersionsComponent implements OnInit {
     private shared: SharedService,
     public dialogRef: MatDialogRef<DialogVersionsComponent>,
     @Inject(MAT_DIALOG_DATA) public data) {
+    this.shared.connectVersionsofControllers().subscribe(data => {
+      this.listOfControllers = data;
+      console.log(data, 'SHARED');
+    });
 
-
-    console.log(this.shared.versions);
-    this.listOfControllers = this.shared.versions;
-    this.loadVersionOfControllers();
 
    }
 
   ngOnInit() {
   }
-  loadVersionOfControllers() {
-    // this.listOfControllers = JSON.parse(this.connectVersionsofControllers());
-    // this.listOfControllers = this.shared.versions;
-    // console.log(this.listOfControllers, 'LIST');
-  }
-  connectVersionsofControllers() {
-    const url = 'https://baconipsum.com/api/?type=meat-and-filler';
-    // const url = 'http://127.0.0.1:52652';
-    const response = this.httpGet(url);
-    console.log(response)
-    return response;
-  }
-  httpGet(url) {
-    let xmlHttp = null;
-    xmlHttp = new XMLHttpRequest();
-    xmlHttp.open('GET', url, false);
-    xmlHttp.send(null);
-    return xmlHttp.responseText;
-  }
+
+  // connectVersionsofControllers() {
+  //   const url = 'https://baconipsum.com/api/?type=meat-and-filler';
+  //   // const url = 'http://127.0.0.1:52652';
+  //   const response = this.httpGet(url);
+  //   console.log(response)
+  //   return response;
+  // }
+  // httpGet(url) {
+  //   let xmlHttp = null;
+  //   xmlHttp = new XMLHttpRequest();
+  //   xmlHttp.open('GET', url, false);
+  //   xmlHttp.send(null);
+  //   return xmlHttp.responseText;
+  // }
   chooseBersions(body) {
     console.log(body);
-    console.log(this.dialogRef);
     this.dialogRef.close();
-    // this.electron.chooseVersionsofControllers(body);
+    this.shared.chooseVersions(body).subscribe(data => {
+      console.log(data, 'HERE');
+    });
   }
   close() {
     this.dialogRef.close();

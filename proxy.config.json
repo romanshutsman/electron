@@ -1,8 +1,7 @@
 {
     "/api/*": {
-      "target": "https://baconipsum.com",
+      "target": "http://localhost:52952",
       "secure": false,
-      "loglevel": "debug",
       "changeOrigin": "true"
     }
   }

@@ -55,7 +55,7 @@ export function HttpLoaderFactory(http: HttpClient) {
     
   ],
   exports: [
-    
+    FormsModule
   ],
   entryComponents: [DialogVersionsComponent],
   providers: [ElectronService, SharedService],

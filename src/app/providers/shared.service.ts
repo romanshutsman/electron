@@ -1,29 +1,39 @@
 import { Injectable } from '@angular/core';
 import { MatDialog } from '@angular/material';
-
+import { HttpClient } from '@angular/common/http';
+// import { Headers,RequestOptions } from '@angular/http';
+import {Http, Headers, RequestOptions} from '@angular/http';
+import { map } from "rxjs/operators";
 @Injectable({
   providedIn: 'root'
 })
 export class SharedService {
 versions;
+
   constructor(
-    public dialog: MatDialog
+    public dialog: MatDialog,
+    private http: HttpClient
   ) {
     this.versions = this.connectVersionsofControllers();
-    console.log(this.versions, 'VERSIONS');
+    // console.log(this.versions, 'VERSIONS');
    }
   connectVersionsofControllers() {
-    // const url = 'https://baconipsum.com/api/?type=meat-and-filler';
-    const url = '/api/?type=meat-and-filler';
-    const response = this.httpGet(url);
-    // console.log(response)
-    return response;
+    // return this.http.get('http://127.0.0.1:84/api/connect').pipe(
+    return this.http.get('/api/connect').pipe(
+      map(data => {
+        console.log(data);
+        return data;
+      })
+    );
   }
-  httpGet(url) {
-    let xmlHttp = null;
-    xmlHttp = new XMLHttpRequest();
-    xmlHttp.open('GET', url, false);
-    xmlHttp.send(null);
-    return xmlHttp.responseText;
+  chooseVersions(body) {
+    const headers = new Headers();
+        headers.append('Content-Type', 'application/json');
+        headers.append('authentication', `hello`);
+
+      //  const options = new RequestOptions({headers: headers});
+
+    return this.http.post('/api/connect/', body);
+    // return this.http.post('http://127.0.0.1:84/api/connect/', body).subscribe();
   }
 }

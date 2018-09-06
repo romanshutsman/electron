@@ -4,8 +4,8 @@ import * as childProcess from 'child_process';
 import * as fs from 'fs';
 import { MatDialog } from '@angular/material';
 import { DialogVersionsComponent } from '../components/dialog-versions/dialog-versions.component';
-
-
+import { Subject } from 'rxjs/Subject';
+import { BehaviorSubject } from 'rxjs';
 
 @Injectable()
 export class ElectronService {
@@ -17,6 +17,8 @@ export class ElectronService {
   fs: typeof fs;
   menu:  Menu;
   menuItem:  MenuItem;
+  showDialog = new Subject<any>();
+  bSubject = new BehaviorSubject(false); 
 
 
   constructor(public dialog: MatDialog) {
@@ -32,7 +34,9 @@ export class ElectronService {
     this.menu = remote.Menu.buildFromTemplate([{
       label: 'Connect',
       click: () => {
-        this.dialog.open(DialogVersionsComponent);
+        // this.dialog.open(DialogVersionsComponent);
+        this.showDialog.next(true);
+        this.bSubject.next(true);
       }
     }]);
     remote.Menu.setApplicationMenu(this.menu);

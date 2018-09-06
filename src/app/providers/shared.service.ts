@@ -19,7 +19,7 @@ versions;
    }
   connectVersionsofControllers() {
     // return this.http.get('http://127.0.0.1:84/api/connect').pipe(
-    return this.http.get('/api/connect').pipe(
+    return this.http.get('https://baconipsum.com/api/?type=all-meat&sentences=1&start-with-lorem=1').pipe(
       map(data => {
         console.log(data);
         return data;

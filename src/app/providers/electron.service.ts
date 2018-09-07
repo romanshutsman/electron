@@ -26,15 +26,42 @@ export class ElectronService {
       this.childProcess = window.require('child_process');
       this.fs = window.require('fs');
     }
-    this.menu = remote.Menu.buildFromTemplate([{
-      label: 'Connect',
-      click: () => {
-        this.connectVersionsofControllers().subscribe(data => {
-          this.bSubject.next(data);
-        });
+    this.menu = remote.Menu.buildFromTemplate([
+      {
+        label: 'Connect',
+        click: () => {
+          this.connectVersionsofControllers().subscribe(data => {
+            this.bSubject.next(data);
+          });
+        }
+      },
+      {
+        label: 'devTools',
+        click: () => {
+          this.remote.getCurrentWebContents().openDevTools();
+        }
+      },
+      {
+        label: 'reload',
+        click: () => {
+          this.remote.getCurrentWebContents().reload();
+        }
+      },
+      {
+        label: 'View',
+        submenu: [
+          {role: 'reload'},
+          {role: 'forcereload'},
+          {role: 'toggledevtools'},
+          {type: 'separator'},
+          {role: 'resetzoom'},
+          {role: 'zoomin'},
+          {role: 'zoomout'},
+          {type: 'separator'},
+          {role: 'togglefullscreen'}
+        ]
       }
-    }
-  ]);
+    ]);
     remote.Menu.setApplicationMenu(this.menu);
   }
   connectVersionsofControllers() {

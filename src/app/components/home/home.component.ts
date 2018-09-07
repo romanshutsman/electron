@@ -12,7 +12,5 @@ export class HomeComponent implements OnInit {
 
   ngOnInit() {
   }
-  onClickLiItem() {
-    console.log('hello');
-  }
+
 }

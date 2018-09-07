@@ -1,7 +1,41 @@
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
-import { FormsModule } from '@angular/forms';
-import { MatCheckboxModule, MatDialogModule } from '@angular/material';
+import { FormsModule, ReactiveFormsModule  } from '@angular/forms';
+import { MatCheckboxModule, 
+        MatDialogModule, 
+        MatRadioModule, 
+        MatButtonModule,  
+        MatButtonToggleModule,
+        MatAutocompleteModule,
+        MatBadgeModule,
+        MatBottomSheetModule,
+        MatCardModule,
+        MatChipsModule,
+        MatDatepickerModule,
+        MatDividerModule,
+        MatExpansionModule,
+        MatGridListModule,
+        MatIconModule,
+        MatInputModule,
+        MatListModule,
+        MatMenuModule,
+        MatNativeDateModule,
+        MatPaginatorModule,
+        MatProgressBarModule,
+        MatProgressSpinnerModule,
+        MatRippleModule,
+        MatSelectModule,
+        MatSidenavModule,
+        MatSliderModule,
+        MatSlideToggleModule,
+        MatSnackBarModule,
+        MatSortModule,
+        MatStepperModule,
+        MatTableModule,
+        MatTabsModule,
+        MatToolbarModule,
+        MatTooltipModule,
+        MatTreeModule } from '@angular/material';
 // import {  } from '@angular/material/dialog';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -16,7 +50,6 @@ import { AppComponent } from './app.component';
 import { HomeComponent } from './components/home/home.component';
 import { WebviewDirective } from './directives/webview.directive';
 import { ElectronService } from './providers/electron.service';
-import { DialogVersionsComponent} from './components/dialog-versions/dialog-versions.component';
 import { SharedService } from './providers/shared.service';
 import { DialogComponent } from './components/dialog/dialog.component';
 
@@ -36,12 +69,12 @@ export function HttpLoaderFactory(http: HttpClient) {
     AppComponent,
     HomeComponent,
     WebviewDirective,
-    DialogVersionsComponent,
     DialogComponent
   ],
   imports: [
     BrowserModule,
     FormsModule,
+    ReactiveFormsModule,
     HttpClientModule,
     AppRoutingModule,
     TranslateModule.forRoot({
@@ -53,13 +86,80 @@ export function HttpLoaderFactory(http: HttpClient) {
     }),
     BrowserAnimationsModule,
     MatCheckboxModule,
-    MatDialogModule
-    
+    MatDialogModule,
+    MatCheckboxModule, 
+    MatDialogModule, 
+    MatRadioModule, 
+    MatButtonModule,  
+    MatButtonToggleModule,
+    MatAutocompleteModule,
+    MatBadgeModule,
+    MatBottomSheetModule,
+    MatCardModule,
+    MatChipsModule,
+    MatDatepickerModule,
+    MatDividerModule,
+    MatExpansionModule,
+    MatGridListModule,
+    MatIconModule,
+    MatInputModule,
+    MatListModule,
+    MatMenuModule,
+    MatNativeDateModule,
+    MatPaginatorModule,
+    MatProgressBarModule,
+    MatProgressSpinnerModule,
+    MatRippleModule,
+    MatSelectModule,
+    MatSidenavModule,
+    MatSliderModule,
+    MatSlideToggleModule,
+    MatSnackBarModule,
+    MatSortModule,
+    MatStepperModule,
+    MatTableModule,
+    MatTabsModule,
+    MatToolbarModule,
+    MatTooltipModule,
+    MatTreeModule
   ],
   exports: [
-    FormsModule
+    FormsModule,
+    ReactiveFormsModule ,
+    MatRadioModule,
+    MatButtonModule,  
+    MatButtonToggleModule,
+    MatAutocompleteModule,
+    MatBadgeModule,
+    MatBottomSheetModule,
+    MatCardModule,
+    MatChipsModule,
+    MatDatepickerModule,
+    MatDividerModule,
+    MatExpansionModule,
+    MatGridListModule,
+    MatIconModule,
+    MatInputModule,
+    MatListModule,
+    MatMenuModule,
+    MatNativeDateModule,
+    MatPaginatorModule,
+    MatProgressBarModule,
+    MatProgressSpinnerModule,
+    MatRippleModule,
+    MatSelectModule,
+    MatSidenavModule,
+    MatSliderModule,
+    MatSlideToggleModule,
+    MatSnackBarModule,
+    MatSortModule,
+    MatStepperModule,
+    MatTableModule,
+    MatTabsModule,
+    MatToolbarModule,
+    MatTooltipModule,
+    MatTreeModule
   ],
-  entryComponents: [DialogVersionsComponent],
   providers: [ElectronService, SharedService],
   bootstrap: [AppComponent]
 })

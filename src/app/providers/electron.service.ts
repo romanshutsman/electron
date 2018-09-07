@@ -3,13 +3,12 @@ import { ipcRenderer, webFrame, remote, Menu, MenuItem } from 'electron';
 import * as childProcess from 'child_process';
 import * as fs from 'fs';
 import { MatDialog } from '@angular/material';
-import { DialogVersionsComponent } from '../components/dialog-versions/dialog-versions.component';
-import { Subject } from 'rxjs/Subject';
 import { BehaviorSubject } from 'rxjs';
+import { HttpClient } from '@angular/common/http';
+import { map } from "rxjs/operators";
 
 @Injectable()
 export class ElectronService {
-  API_URL = 'http:localhost:52952/api/connect';
   ipcRenderer: typeof ipcRenderer;
   webFrame: typeof webFrame;
   remote: typeof remote;
@@ -17,33 +16,32 @@ export class ElectronService {
   fs: typeof fs;
   menu:  Menu;
   menuItem:  MenuItem;
-  showDialog = new Subject<any>();
-  bSubject = new BehaviorSubject(false); 
+  bSubject = new BehaviorSubject<any>(false); 
 
-
-  constructor(public dialog: MatDialog) {
-    // Conditional imports
+  constructor(public dialog: MatDialog, private http: HttpClient) {
     if (this.isElectron()) {
       this.ipcRenderer = window.require('electron').ipcRenderer;
       this.webFrame = window.require('electron').webFrame;
       this.remote = window.require('electron').remote;
-
       this.childProcess = window.require('child_process');
       this.fs = window.require('fs');
     }
     this.menu = remote.Menu.buildFromTemplate([{
       label: 'Connect',
       click: () => {
-        // this.dialog.open(DialogVersionsComponent);
-        this.showDialog.next(true);
-        this.bSubject.next(true);
+        this.connectVersionsofControllers().subscribe(data => {
+          this.bSubject.next(data);
+        });
       }
-    }]);
+    }
+  ]);
     remote.Menu.setApplicationMenu(this.menu);
   }
-
+  connectVersionsofControllers() {
+    return this.http.get('/api/connect').pipe(map(data => data));
+  }
   chooseVersionsofControllers(body) {
-    // return this.http.post(this.API_URL + '/connect/' , body);
+    return this.http.post('/api/connect' , body);
   }
   isElectron = () => {
     return window && window.process && window.process.type;

@@ -1,11 +1,53 @@
 p {
+    text-align: center;
+    margin: 0;
+}
+div.over {
     display: flex;
     justify-content: center;
     align-items: center;
     width: 100vw;
     height: 100vh;
-    background: #2b3838;
+    background: rgba(0,0,0,.5);
     color: white;
     font-size: 28px;
 
+}
+.pop {
+    min-height: 100px;
+    background: white;
+    color: black;
+    border-radius: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 30px;
+}
+.group {
+    display: flex;
+    flex-direction: column;
+}
+.connected {
+    display: flex;
+    flex-direction: column;
+}
+button {
+    height: 40px;
+}
+.first-btn {
+    margin-top: 20px;
+}
+.info {
+    font-size: 14px;
+}
+.groupDiv {
+    margin-bottom: 20px;
+}
+.main-info {
+    font-size: 20px;
+    text-decoration: underline;
+}
+.header {
+    margin-bottom: 20px;
+    color: #28a745;
 }
